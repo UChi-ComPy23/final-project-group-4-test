@@ -299,8 +299,6 @@ def compute_energy(lattice):
 # Compute total energy H of a given configuration (end)
 # ============================================================
 
-d
-
 
 def plot_results(beta_range, magnetizations, errors, N):
     """
@@ -413,16 +411,59 @@ def critical_temperature_vs_size(N_values, beta_range, n_samples, tol):
 
     return Tc_from_mag, Tc_from_C
 
+def plot_energy_vs_temperature(beta_range, energies, N):
+    """
+    Plot average energy <H> as a function of temperature T = 1 / beta.
+    """
+    temperatures = 1.0 / np.array(beta_range)
+
+    plt.figure(figsize=(6, 4))
+    plt.plot(temperatures, energies, "o-", label=f"N={N}")
+    plt.xlabel("Temperature $T$")
+    plt.ylabel(r"Average Energy $\langle H \rangle$")
+    plt.title("Energy vs Temperature")
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_specific_heat_vs_temperature(beta_range, specific_heats, N):
+    """
+    Plot specific heat C(T) as a function of temperature T = 1 / beta.
+    """
+    temperatures = 1.0 / np.array(beta_range)
+
+    plt.figure(figsize=(6, 4))
+    plt.plot(temperatures, specific_heats, "o-", label=f"N={N}")
+    plt.xlabel("Temperature $T$")
+    plt.ylabel(r"Specific Heat $C(T)$")
+    plt.title("Specific Heat vs Temperature")
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
 
 
 if __name__ == "__main__":
     N = 20
-    beta_range = np.linspace(0.2, 2.0, 30)  # T from ~1.4 to 5
-    n_samples = 300
+    beta_range = np.linspace(0.2, 0.7, 40)  # 你可以根据需要调整范围和步长
+    n_samples = 500
     tol = 0.01
 
+    magnetizations, mag_errors, energies, specific_heats = simulate_ising(
+        N, beta_range, n_samples, tol
+    )
+
+    # 1. Magnetization vs Temperature (you already had)
+    plot_results(beta_range, magnetizations, mag_errors, N)
+
+    # 2. NEW: Energy vs Temperature
+    plot_energy_vs_temperature(beta_range, energies, N)
+
+    # 3. NEW: Specific Heat vs Temperature
+    plot_specific_heat_vs_temperature(beta_range, specific_heats, N)
+
+    # 4. (Optional) Tc vs N, with both estimators
     N_values = [10, 20, 30, 40]
     Tc_mag, Tc_C = critical_temperature_vs_size(N_values, beta_range, n_samples, tol)
-
-
-
