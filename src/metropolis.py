@@ -424,7 +424,7 @@ def plot_specific_heat_vs_temperature(beta_range, specific_heats, N):
 
 if __name__ == "__main__":
     N = 20
-    beta_range = np.linspace(0.2, 0.7, 40)  # 你可以根据需要调整范围和步长
+    beta_range = np.linspace(0.2, 0.7, 40)
     n_samples = 500
     tol = 0.01
 
