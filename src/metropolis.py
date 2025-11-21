@@ -315,25 +315,25 @@ def plot_results(beta_range, magnetizations, errors, N):
 
 
 
-# Critical temperature vs lattice size
-def critical_temperature_vs_size(N_values, beta_range, n_samples, tol):
-    """
-    Plot critical temperature (Tc) as a function of lattice size N^2.
-    """
-    Tc_values = []
-    for N in N_values:
-        magnetizations, mag_errors, energies, specific_heats = simulate_ising(
-            N, beta_range, n_samples, tol
-        )
-        Tc = 1 / beta_range[np.argmax(np.gradient(magnetizations))]
-        Tc_values.append(Tc)
-
-    plt.plot(N_values, Tc_values, marker='o')
-    plt.xlabel(r"Lattice Size $N^2$")
-    plt.ylabel("Critical Temperature (Tc)")
-    plt.title("Critical Temperature vs Lattice Size")
-    plt.grid()
-    plt.show()
+# # Critical temperature vs lattice size
+# def critical_temperature_vs_size(N_values, beta_range, n_samples, tol):
+#     """
+#     Plot critical temperature (Tc) as a function of lattice size N^2.
+#     """
+#     Tc_values = []
+#     for N in N_values:
+#         magnetizations, mag_errors, energies, specific_heats = simulate_ising(
+#             N, beta_range, n_samples, tol
+#         )
+#         Tc = 1 / beta_range[np.argmax(np.gradient(magnetizations))]
+#         Tc_values.append(Tc)
+#
+#     plt.plot(N_values, Tc_values, marker='o')
+#     plt.xlabel(r"Lattice Size $N^2$")
+#     plt.ylabel("Critical Temperature (Tc)")
+#     plt.title("Critical Temperature vs Lattice Size")
+#     plt.grid()
+#     plt.show()
 
 
 
